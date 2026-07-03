@@ -1,0 +1,3246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS Certified Generative AI Developer – Professional (AIP-C01) — Mock Test 3 — K21 Academy Exam Simulator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET & TOKENS ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green:      #8DC63F;
+  --green-mid:  #79B030;
+  --green-bg:   #F1F8E8;
+  --green-dark: #4A7A1B;
+  --navy:       #1A1248;
+  --navy-mid:   #2E2080;
+  --navy-light: #F0EEF8;
+  --bg:         #F0F2F5;
+  --surface:    #FFFFFF;
+  --border:     #DDE1E8;
+  --text-1:     #111827;
+  --text-2:     #4B5563;
+  --text-3:     #9CA3AF;
+  --orange:     #FF9900;
+  --orange-dk:  #E07B00;
+  --red:        #DC2626;
+  --red-bg:     #FEF2F2;
+  --amber:      #D97706;
+  --amber-bg:   #FFFBEB;
+  --correct:    #16A34A;
+  --correct-bg: #F0FDF4;
+  --wrong:      #DC2626;
+  --wrong-bg:   #FEF2F2;
+  --radius:     10px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+}
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-1); -webkit-font-smoothing: antialiased; }
+button { font-family: 'DM Sans', sans-serif; }
+
+/* ===== TOP HEADER BAR ===== */
+.exam-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 58px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.exam-header-logo { display: flex; align-items: center; gap: 12px; }
+.exam-header-logo .logo-badge {
+  background: var(--green); color: #fff; font-weight: 800;
+  font-size: 12px; padding: 4px 9px; border-radius: 6px; letter-spacing: .04em;
+}
+.exam-header-logo .exam-title { color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+.exam-header-logo .exam-title span { color: var(--green); }
+.exam-header-meta { display: flex; align-items: center; gap: 20px; }
+.meta-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px; padding: 5px 12px; color: #fff; font-size: 13px; font-weight: 500;
+}
+.meta-pill .label { color: rgba(255,255,255,.55); font-size: 11px; font-weight: 500; margin-right: 2px; }
+.meta-pill.timer-pill { min-width: 110px; }
+.timer-val { font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.timer-val.warning { color: #F87171; animation: blink .8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+/* ===== LAYOUT ===== */
+.exam-layout {
+  display: flex; padding-top: 58px; min-height: 100vh;
+}
+.exam-main {
+  flex: 1; min-width: 0;
+  padding: 28px 28px 120px 28px;
+  max-width: 900px;
+}
+.exam-sidebar {
+  width: 280px; flex-shrink: 0;
+  padding: 20px 16px 80px 0;
+  position: sticky; top: 58px; height: calc(100vh - 58px);
+  overflow-y: auto;
+}
+
+/* ===== QUESTION CARD ===== */
+.question-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 28px 30px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn .22s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+.q-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+.q-num-badge {
+  background: var(--navy); color: #fff; font-size: 12px; font-weight: 700;
+  padding: 4px 12px; border-radius: 100px;
+}
+.q-tags { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.domain-tag {
+  background: var(--navy-light); color: var(--navy-mid); font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px; letter-spacing: .02em;
+}
+.multi-tag {
+  background: #FFF3CD; color: #7B5000; font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px;
+}
+
+.question-text {
+  font-size: 15.5px; font-weight: 600; line-height: 1.65; color: var(--text-1);
+  margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1.5px solid var(--border);
+}
+.multi-notice {
+  background: #FFF8E7; border: 1px solid #FFD97A; border-radius: 8px;
+  padding: 8px 14px; font-size: 13px; font-weight: 600; color: #7B5000;
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+
+/* OPTIONS */
+.options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.option-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border: 2px solid var(--border);
+  border-radius: 10px; cursor: pointer; background: #FAFBFC;
+  transition: border-color .18s, background .18s, transform .12s;
+  user-select: none;
+}
+.option-item:hover { border-color: var(--navy-mid); background: var(--navy-light); transform: translateX(2px); }
+.option-item.selected { border-color: var(--navy); background: var(--navy-light); }
+.option-item.correct-ans { border-color: var(--correct); background: var(--correct-bg); }
+.option-item.wrong-ans   { border-color: var(--wrong);   background: var(--wrong-bg);   }
+.option-item.no-select   { cursor: default; }
+.option-item.no-select:hover { transform: none; }
+
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; margin-top: 1px;
+  background: var(--border); color: var(--text-2);
+  transition: background .18s, color .18s;
+}
+.option-item.selected .opt-letter { background: var(--navy); color: #fff; }
+.option-item.correct-ans .opt-letter { background: var(--correct); color: #fff; }
+.option-item.wrong-ans   .opt-letter { background: var(--wrong); color: #fff; }
+
+.opt-label { font-size: 14.5px; line-height: 1.55; color: var(--text-1); flex: 1; padding-top: 2px; }
+.opt-icon { font-size: 17px; margin-top: 3px; flex-shrink: 0; }
+
+/* EXPLANATION */
+.explanation-box {
+  margin-top: 20px; padding: 16px 18px;
+  background: #EFF6FF; border: 1.5px solid #BFDBFE;
+  border-radius: 10px; display: none;
+}
+.explanation-box.show { display: block; }
+.exp-header { font-size: 13px; font-weight: 800; color: #1D4ED8; margin-bottom: 6px; letter-spacing: .02em; }
+.exp-text { font-size: 14px; line-height: 1.65; color: #1E3A8A; }
+
+/* Q NAV BUTTONS */
+.q-nav-btns {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 24px; flex-wrap: wrap; gap: 12px;
+}
+.btn-flag {
+  display: flex; align-items: center; gap: 7px;
+  background: transparent; border: 2px solid var(--amber);
+  color: var(--amber); font-size: 13px; font-weight: 700;
+  padding: 9px 16px; border-radius: 8px; cursor: pointer;
+  transition: background .18s, color .18s;
+}
+.btn-flag:hover, .btn-flag.flagged { background: var(--amber-bg); }
+.btn-flag.flagged { border-color: var(--amber); color: var(--amber); }
+.btn-flag.flagged::before { content: '🚩 '; }
+
+.btn-nav {
+  background: var(--navy); color: #fff; border: none;
+  font-size: 14px; font-weight: 700; padding: 11px 22px;
+  border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: background .18s, transform .12s;
+}
+.btn-nav:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-nav:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+.btn-nav.prev { background: var(--surface); color: var(--navy); border: 2px solid var(--border); }
+.btn-nav.prev:hover { border-color: var(--navy); }
+
+/* ===== SIDEBAR ===== */
+.sidebar-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 16px; margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.sidebar-title { font-size: 11.5px; font-weight: 800; color: var(--text-3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+
+/* Question Navigator Grid */
+.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+.nav-btn {
+  width: 100%; aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 700; border-radius: 7px;
+  cursor: pointer; border: 2px solid var(--border);
+  background: var(--surface); color: var(--text-2);
+  transition: all .15s; position: relative;
+}
+.nav-btn:hover { border-color: var(--navy); color: var(--navy); }
+.nav-btn.current { border-color: var(--navy); background: var(--navy); color: #fff; }
+.nav-btn.answered { border-color: var(--green); background: var(--green-bg); color: var(--green-dark); }
+.nav-btn.flagged-q { border-color: var(--amber); }
+.nav-btn.flagged-q::after {
+  content: ''; position: absolute; top: 1px; right: 1px;
+  width: 6px; height: 6px; background: var(--amber); border-radius: 50%;
+}
+.nav-btn.answered.flagged-q { background: var(--green-bg); }
+.nav-btn.correct-r { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+.nav-btn.wrong-r   { border-color: var(--wrong);   background: var(--wrong-bg);   color: var(--wrong);   }
+
+/* Legend */
+.legend { display: flex; flex-direction: column; gap: 7px; }
+.legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; border: 1.5px solid transparent; }
+.ld-ans  { background: var(--green-bg); border-color: var(--green); }
+.ld-cur  { background: var(--navy); border-color: var(--navy); }
+.ld-flag { background: var(--surface); border-color: var(--amber); position:relative; }
+.ld-flag::after { content:''; position:absolute; top:-1px; right:-1px; width:5px; height:5px; background:var(--amber); border-radius:50%; }
+.ld-unan { background: var(--surface); border-color: var(--border); }
+
+/* Stats */
+.stat-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { color: var(--text-2); }
+.stat-val { font-weight: 700; color: var(--text-1); }
+
+/* Submit button in sidebar */
+.btn-submit-sidebar {
+  width: 100%; padding: 13px; background: var(--green); color: #fff;
+  font-size: 14px; font-weight: 800; border: none; border-radius: 10px;
+  cursor: pointer; transition: background .18s, transform .12s;
+  letter-spacing: .01em;
+}
+.btn-submit-sidebar:hover { background: var(--green-mid); transform: translateY(-1px); }
+.btn-submit-sidebar:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ===== START SCREEN ===== */
+#start-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.start-container {
+  background: var(--surface); border-radius: 20px; padding: 44px 40px;
+  max-width: 680px; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  text-align: center;
+}
+.start-logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 28px; }
+.start-logo-badge { background: var(--navy); color: #fff; font-weight: 800; font-size: 14px; padding: 8px 14px; border-radius: 8px; }
+.start-logo-badge span { color: var(--green); }
+.cert-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy-light); color: var(--navy-mid); font-size: 12px; font-weight: 700;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; letter-spacing: .04em;
+}
+.start-h1 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 10px; }
+.start-h1 span { color: var(--green-mid); }
+.start-sub { font-size: 15px; color: var(--text-2); line-height: 1.6; margin-bottom: 28px; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; text-align: left; margin-bottom: 28px; }
+.info-item-box {
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 14px 16px;
+}
+.info-item-box .i-label { font-size: 11px; font-weight: 700; color: var(--text-3); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 4px; }
+.info-item-box .i-val { font-size: 15px; font-weight: 700; color: var(--text-1); }
+
+.domain-table { text-align: left; width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.domain-table th { font-size: 11px; font-weight: 700; color: var(--text-3); letter-spacing: .07em; text-transform: uppercase; padding: 6px 10px; border-bottom: 2px solid var(--border); }
+.domain-table td { font-size: 13.5px; color: var(--text-2); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.domain-table td:last-child { font-weight: 700; color: var(--navy-mid); text-align: right; }
+
+.rules-box { background: #FFF8E7; border: 1.5px solid #FFD97A; border-radius: 10px; padding: 14px 16px; text-align: left; margin-bottom: 28px; }
+.rules-box .rules-title { font-size: 12px; font-weight: 800; color: #7B5000; margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; }
+.rules-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.rules-box li { font-size: 13px; color: #7B5000; display: flex; align-items: flex-start; gap: 8px; }
+.rules-box li::before { content: '⚠'; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+.btn-start {
+  width: 100%; padding: 16px; background: var(--green); color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 800;
+  border: none; border-radius: 12px; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(141,198,63,.4);
+  transition: background .18s, transform .15s, box-shadow .18s;
+}
+.btn-start:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(141,198,63,.45); }
+
+/* ===== BLUR WARNING OVERLAY ===== */
+#blur-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(17,18,40,.93); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#blur-overlay.show { display: flex; }
+.blur-box {
+  background: var(--surface); border-radius: 16px; padding: 36px 32px;
+  max-width: 420px; width: 100%; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.blur-icon { font-size: 48px; margin-bottom: 12px; }
+.blur-h { font-size: 20px; font-weight: 800; color: var(--red); margin-bottom: 8px; }
+.blur-p { font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+.blur-count-warning { background: var(--red-bg); border: 1.5px solid #FCA5A5; border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 20px; }
+.btn-return {
+  background: var(--navy); color: #fff; border: none;
+  padding: 13px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.btn-return:hover { background: var(--navy-mid); }
+
+/* ===== CONFIRM MODAL ===== */
+#confirm-modal {
+  display: none; position: fixed; inset: 0; z-index: 8888;
+  background: rgba(0,0,0,.6); align-items: center; justify-content: center; padding: 20px;
+}
+#confirm-modal.show { display: flex; }
+.modal-box {
+  background: var(--surface); border-radius: 14px; padding: 28px 30px;
+  max-width: 440px; width: 100%; box-shadow: 0 16px 50px rgba(0,0,0,.3);
+}
+.modal-title { font-size: 17px; font-weight: 800; color: var(--text-1); margin-bottom: 10px; }
+.modal-body { font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; }
+.modal-row { display: flex; gap: 10px; justify-content: flex-end; }
+.btn-modal-cancel { background: var(--bg); border: 2px solid var(--border); color: var(--text-2); padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.btn-modal-ok { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.btn-modal-ok:hover { background: var(--green-mid); }
+.unanswered-list { background: var(--amber-bg); border: 1px solid #FCD34D; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #7B5000; margin-bottom: 14px; }
+
+/* ===== RESULTS SCREEN ===== */
+#result-screen {
+  display: none; min-height: 100vh; padding: 58px 20px 40px;
+}
+.result-wrapper { max-width: 800px; margin: 0 auto; padding: 28px 0; }
+.result-hero {
+  background: var(--surface); border-radius: 16px; padding: 32px 30px;
+  box-shadow: var(--shadow-md); text-align: center; margin-bottom: 20px; border: 1.5px solid var(--border);
+}
+.result-logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 22px; }
+.result-pass-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 18px; border-radius: 100px; font-size: 14px; font-weight: 800; margin-bottom: 12px;
+}
+.badge-pass { background: #D1FAE5; color: var(--correct); }
+.badge-fail { background: #FEE2E2; color: var(--red); }
+.result-pct { font-size: 60px; font-weight: 800; line-height: 1; margin: 8px 0; }
+.pct-pass { color: var(--correct); }
+.pct-fail { color: var(--red); }
+.result-scaled { font-size: 20px; font-weight: 700; color: var(--text-2); margin-bottom: 4px; }
+.result-scaled span { color: var(--text-1); font-weight: 800; }
+.result-correct-row { font-size: 14px; color: var(--text-3); margin-top: 6px; }
+.result-correct-row strong { color: var(--text-2); }
+
+.domain-breakdown {
+  background: var(--surface); border-radius: 16px; padding: 24px 26px;
+  box-shadow: var(--shadow-sm); margin-bottom: 20px; border: 1.5px solid var(--border);
+}
+.breakdown-title { font-size: 15px; font-weight: 800; color: var(--text-1); margin-bottom: 16px; }
+.domain-row-r {
+  display: grid; grid-template-columns: 1fr 80px 60px;
+  gap: 12px; align-items: center; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.domain-row-r:last-child { border-bottom: none; }
+.dr-name { font-size: 14px; color: var(--text-2); font-weight: 500; }
+.dr-score { font-size: 13.5px; color: var(--text-3); text-align: center; font-variant-numeric: tabular-nums; }
+.dr-pct { text-align: right; font-size: 13.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; }
+.dr-good { background: #D1FAE5; color: var(--correct); }
+.dr-mid  { background: #FEF3C7; color: var(--amber); }
+.dr-bad  { background: #FEE2E2; color: var(--red); }
+
+.result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-retake {
+  background: var(--navy); color: #fff; border: none;
+  padding: 14px 32px; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .18s, transform .12s;
+}
+.btn-retake:hover { background: var(--navy-mid); transform: translateY(-1px); }
+.btn-review {
+  background: var(--surface); color: var(--navy); border: 2px solid var(--navy);
+  padding: 14px 32px; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  transition: background .18s, transform .12s;
+}
+.btn-review:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+/* ===== REVIEW MODE ===== */
+#review-screen { display: none; padding: 80px 20px 60px; }
+.review-wrapper { max-width: 820px; margin: 0 auto; }
+.review-q-card {
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 24px 26px; margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.review-q-card.rq-correct { border-left: 4px solid var(--correct); }
+.review-q-card.rq-wrong   { border-left: 4px solid var(--red); }
+.rq-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.rq-result-tag { font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 100px; }
+.rq-correct-tag { background: #D1FAE5; color: var(--correct); }
+.rq-wrong-tag   { background: #FEE2E2; color: var(--red); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar-wrap { height: 3px; background: rgba(255,255,255,.15); position: fixed; top: 58px; left: 0; right: 0; z-index: 199; }
+.progress-bar-fill { height: 100%; background: var(--green); transition: width .3s ease; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .exam-sidebar { display: none; }
+  .exam-main { padding: 20px 16px 100px; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .start-container { padding: 28px 20px; }
+}
+@media (max-width: 500px) {
+  .info-grid { grid-template-columns: 1fr; }
+  .exam-header-meta .meta-pill:not(.timer-pill) { display: none; }
+}
+
+/* Mobile bottom nav */
+.mobile-nav-bar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+  background: var(--surface); border-top: 1.5px solid var(--border);
+  padding: 10px 16px; gap: 10px; align-items: center; justify-content: space-between;
+}
+@media (max-width: 768px) { .mobile-nav-bar { display: flex; } }
+.mob-answered { font-size: 12px; color: var(--text-3); font-weight: 600; }
+.mob-answered strong { color: var(--text-1); }
+
+/* ===== PRINT HIDE ===== */
+@media print { #blur-overlay, #confirm-modal, .exam-header, .progress-bar-wrap { display: none !important; } }
+</style>
+
+</head>
+<body>
+
+<!-- ========== START / RULES SCREEN ========== -->
+<div id="start-screen">
+  <div class="start-container">
+    <div class="start-logo-row">
+      <div class="start-logo-badge">K21 <span>Academy</span></div>
+    </div>
+    <div class="cert-badge"><span>☁️</span> AWS Certification Exam Simulator &middot; Mock Test 3</div>
+    <h1 class="start-h1">AWS Certified <span>Generative AI Developer – Professional</span></h1>
+    <p class="start-sub">AIP-C01 &middot; <strong>Mock Test 3</strong> &mdash; Practice in a real exam environment with a timer, question navigator, flagging, and instant feedback after submission.</p>
+
+    <div class="info-grid">
+      <div class="info-item-box"><div class="i-label">Questions</div><div class="i-val">75 Questions</div></div>
+      <div class="info-item-box"><div class="i-label">Time Limit</div><div class="i-val">180 Minutes</div></div>
+      <div class="info-item-box"><div class="i-label">Passing Score</div><div class="i-val">750 / 1000 (scaled)</div></div>
+      <div class="info-item-box"><div class="i-label">Question Types</div><div class="i-val">Multiple Choice &amp; Multiple Response</div></div>
+    </div>
+
+    <table class="domain-table">
+      <thead><tr><th>Domain</th><th>Topic</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>Domain 1</td><td>Foundation Model Integration, Data Management, and Compliance</td><td>31%</td></tr>
+        <tr><td>Domain 2</td><td>Implementation and Integration</td><td>26%</td></tr>
+        <tr><td>Domain 3</td><td>AI Safety, Security, and Governance</td><td>20%</td></tr>
+        <tr><td>Domain 4</td><td>Operational Efficiency and Optimization for GenAI Applications</td><td>12%</td></tr>
+        <tr><td>Domain 5</td><td>Testing, Validation, and Troubleshooting</td><td>11%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="rules-box">
+      <div class="rules-title">⚠ Exam Rules — Read Before Starting</div>
+      <ul>
+        <li>Do NOT switch tabs or minimize the browser — your exam will be paused and a warning issued.</li>
+        <li>3 tab-switch warnings will automatically end and submit your exam.</li>
+        <li>Multi-select questions require you to choose the exact number of correct answers indicated. Partial credit is not given.</li>
+        <li>You can flag questions for review and return to them before submitting.</li>
+        <li>When the timer reaches zero, your exam is submitted automatically.</li>
+        <li>Once submitted, answers cannot be changed.</li>
+      </ul>
+    </div>
+
+    <button class="btn-start" onclick="startExam()">▶ Start Exam Now</button>
+  </div>
+</div>
+
+<!-- ========== EXAM UI ========== -->
+<div id="exam-ui" style="display:none;">
+  <header class="exam-header">
+    <div class="exam-header-logo">
+      <div class="logo-badge">K21</div>
+      <div class="exam-title">AWS AIP-C01 · Mock Test 3 — <span>Generative AI Developer Professional</span></div>
+    </div>
+    <div class="exam-header-meta">
+      <div class="meta-pill"><span class="label">Answered</span><span id="hdr-answered">0/75</span></div>
+      <div class="meta-pill"><span class="label">Flagged</span><span id="hdr-flagged">0</span></div>
+      <div class="meta-pill timer-pill"><span>⏱</span><span class="timer-val" id="timer">180:00</span></div>
+    </div>
+  </header>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+
+  <div class="exam-layout">
+    <main class="exam-main">
+      <div id="question-container"></div>
+      <div class="q-nav-btns">
+        <button class="btn-nav prev" id="btn-prev" onclick="goToPrev()">← Prev</button>
+        <button class="btn-flag" id="btn-flag" onclick="toggleFlag(currentQ)">⚑ Flag for Review</button>
+        <button class="btn-nav" id="btn-next" onclick="goToNext()">Next →</button>
+      </div>
+    </main>
+
+    <aside class="exam-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">Progress</div>
+        <div class="stat-row"><span class="stat-label">Answered</span><span class="stat-val" id="stat-answered">0 / 75</span></div>
+        <div class="stat-row"><span class="stat-label">Unanswered</span><span class="stat-val" id="stat-unanswered">75</span></div>
+        <div class="stat-row"><span class="stat-label">Flagged</span><span class="stat-val" id="stat-flagged">0</span></div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title">Question Navigator</div>
+        <div class="nav-grid" id="nav-grid"></div>
+        <div class="legend" style="margin-top:14px;">
+          <div class="legend-row"><span class="legend-dot ld-cur"></span> Current</div>
+          <div class="legend-row"><span class="legend-dot ld-ans"></span> Answered</div>
+          <div class="legend-row"><span class="legend-dot ld-flag"></span> Flagged</div>
+          <div class="legend-row"><span class="legend-dot ld-unan"></span> Unanswered</div>
+        </div>
+      </div>
+
+      <button class="btn-submit-sidebar" onclick="trySubmit()">Submit Exam →</button>
+    </aside>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <div class="mobile-nav-bar">
+    <button class="btn-nav prev" onclick="goToPrev()">←</button>
+    <div class="mob-answered">Q <strong id="mob-current">1</strong> of <strong>75</strong> · <span id="mob-answered">0</span> answered</div>
+    <button class="btn-nav" onclick="trySubmit()" style="background:var(--green)">Submit</button>
+    <button class="btn-nav" onclick="goToNext()">→</button>
+  </div>
+</div>
+
+<!-- ========== RESULT SCREEN ========== -->
+<div id="result-screen">
+  <div class="result-wrapper">
+    <div class="result-hero">
+      <div class="result-logo-row"><div class="start-logo-badge">K21 <span>Academy</span></div></div>
+      <div class="result-pass-badge" id="result-badge"></div>
+      <div class="result-pct" id="result-pct"></div>
+      <div class="result-scaled" id="result-scaled"></div>
+      <div class="result-correct-row" id="result-correct"></div>
+    </div>
+
+    <div class="domain-breakdown">
+      <div class="breakdown-title">📊 Domain-wise Breakdown</div>
+      <div id="domain-breakdown-rows"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-retake" onclick="resetExam()">↺ Retake Exam</button>
+      <button class="btn-review" onclick="showReview()">🔍 Review All Questions</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== REVIEW SCREEN ========== -->
+<div id="review-screen">
+  <header class="exam-header">
+    <div class="exam-header-logo">
+      <div class="logo-badge">K21</div>
+      <div class="exam-title">Review Mode — <span>AIP-C01 · Mock Test 3</span></div>
+    </div>
+    <div class="exam-header-meta">
+      <button class="btn-return" onclick="backToResults()">← Back to Results</button>
+    </div>
+  </header>
+  <div class="review-wrapper" id="review-wrapper" style="padding-top:20px;"></div>
+</div>
+
+<!-- ========== TAB-SWITCH / BLUR OVERLAY ========== -->
+<div id="blur-overlay">
+  <div class="blur-box">
+    <div class="blur-icon">🚨</div>
+    <div class="blur-h">You Left the Exam!</div>
+    <div class="blur-p">Switching tabs or minimizing the browser is not allowed during the exam.</div>
+    <div class="blur-count-warning" id="blur-count-msg"></div>
+    <button class="btn-return" onclick="returnToExam()">Return to Exam</button>
+  </div>
+</div>
+
+<!-- ========== CONFIRM SUBMIT MODAL ========== -->
+<div id="confirm-modal">
+  <div class="modal-box">
+    <div class="modal-title">Submit Exam?</div>
+    <div class="modal-body" id="confirm-body">Are you sure you want to submit? You cannot change your answers after submitting.</div>
+    <div class="modal-row">
+      <button class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-modal-ok" onclick="confirmSubmit()">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================================================================
+// EXAM CONFIG — AWS Certified Generative AI Developer – Professional (AIP-C01)
+// ===================================================================
+const EXAM = {
+  total: 75,
+  timeLimitSec: 180 * 60,   // 180 minutes
+  passScaled: 750,          // 750 / 1000
+  maxBlur: 3
+};
+const DOMAIN_SHORT = {
+  "Foundation Model Integration, Data Management, and Compliance":       "Domain 1",
+  "Implementation and Integration":                                     "Domain 2",
+  "AI Safety, Security, and Governance":                                 "Domain 3",
+  "Operational Efficiency and Optimization for GenAI Applications":      "Domain 4",
+  "Testing, Validation, and Troubleshooting":                           "Domain 5"
+};
+const DOMAIN_ORDER = [
+  "Foundation Model Integration, Data Management, and Compliance",
+  "Implementation and Integration",
+  "AI Safety, Security, and Governance",
+  "Operational Efficiency and Optimization for GenAI Applications",
+  "Testing, Validation, and Troubleshooting"
+];
+
+// ===================================================================
+// QUESTION BANK (75 original AIP-C01 practice questions) — MOCK TEST 3
+// ===================================================================
+const questions = [
+{
+  "id": "q001",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A developer is selecting an embeddings model on Amazon Bedrock and must ensure high-quality semantic retrieval for English business documents. What is the MOST important selection consideration?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Choose an embeddings model suited to the language/domain, and use it consistently for indexing and queries"
+    },
+    {
+      "id": "b",
+      "text": "Choose any text generation model instead of an embeddings model"
+    },
+    {
+      "id": "c",
+      "text": "Choose the model with the largest image resolution"
+    },
+    {
+      "id": "d",
+      "text": "Choose based on the model's speech synthesis quality"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "The right choice is an embeddings model appropriate for the language and domain, applied consistently to both documents and queries so vectors are comparable. A text generation model is not an embeddings model, and image resolution or speech quality are irrelevant to text retrieval."
+},
+{
+  "id": "q002",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team observes that very large chunks return broad, less precise matches, while very small chunks lose context. What does this illustrate about chunk size?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Chunk size is a trade-off between retrieval precision and preserving enough context, and should be tuned"
+    },
+    {
+      "id": "b",
+      "text": "Larger chunks are always better in every case"
+    },
+    {
+      "id": "c",
+      "text": "Smaller chunks are always better in every case"
+    },
+    {
+      "id": "d",
+      "text": "Chunk size has no effect on retrieval"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Chunk size trades off precision (favored by smaller chunks) against context completeness (favored by larger chunks), so it must be tuned for the corpus and use case. Neither extreme is universally best, and chunk size clearly affects retrieval."
+},
+{
+  "id": "q003",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A knowledge base must return only the most recent policy versions when multiple versions exist. Which capability enables filtering by document date?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Store a date attribute in document metadata and filter/rank by it at retrieval time"
+    },
+    {
+      "id": "b",
+      "text": "Increase temperature to prefer recent documents"
+    },
+    {
+      "id": "c",
+      "text": "Use a text-to-image model to detect dates"
+    },
+    {
+      "id": "d",
+      "text": "Disable metadata"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Storing a date attribute in metadata lets the retriever filter or rank results by recency to surface the latest versions. Temperature, image models, and disabling metadata do not enable date-based filtering."
+},
+{
+  "id": "q004",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A company must discover where sensitive data (like credit card numbers) resides across large S3 datasets before building a knowledge base. Which service is purpose-built for this discovery?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Macie"
+    },
+    {
+      "id": "b",
+      "text": "Amazon Polly"
+    },
+    {
+      "id": "c",
+      "text": "Amazon CloudFront"
+    },
+    {
+      "id": "d",
+      "text": "AWS Step Functions"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon Macie discovers and classifies sensitive data (such as PII and financial data) in Amazon S3, informing what to exclude or protect. Polly, CloudFront, and Step Functions do not perform sensitive-data discovery."
+},
+{
+  "id": "q005",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A document set contains PII that must be detected and removed from text before it is embedded and stored. Which service can identify PII entities in the text during preprocessing?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Comprehend (PII detection)"
+    },
+    {
+      "id": "b",
+      "text": "Amazon Rekognition"
+    },
+    {
+      "id": "c",
+      "text": "Amazon Athena"
+    },
+    {
+      "id": "d",
+      "text": "AWS Ground Station"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon Comprehend can detect and help redact PII entities in text during preprocessing before embedding. Rekognition analyzes images, Athena queries data, and Ground Station is for satellites, none of which detect PII in text for this purpose."
+},
+{
+  "id": "q006",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A SaaS company serves multiple customers from one GenAI platform and must ensure each customer's documents are isolated at retrieval. Which TWO approaches support tenant isolation? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Tag chunks with a tenant identifier in metadata and filter retrieval by tenant"
+    },
+    {
+      "id": "b",
+      "text": "Use separate knowledge bases or indexes per tenant"
+    },
+    {
+      "id": "c",
+      "text": "Store all tenants' data together with no filtering"
+    },
+    {
+      "id": "d",
+      "text": "Rely on temperature to separate tenants"
+    },
+    {
+      "id": "e",
+      "text": "Return random tenants' documents"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "Tenant-tagged metadata with per-tenant filtering, or separate knowledge bases/indexes per tenant, both enforce isolation. Commingling data without filtering, using temperature, or returning random documents break isolation."
+},
+{
+  "id": "q007",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A workload must keep all inference and data within the EU to meet regulatory requirements. Which action supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Deploy and invoke Bedrock in an EU Region and keep data sources and vector stores in the EU"
+    },
+    {
+      "id": "b",
+      "text": "Invoke Bedrock in whichever Region is cheapest globally"
+    },
+    {
+      "id": "c",
+      "text": "Replicate data to every Region worldwide"
+    },
+    {
+      "id": "d",
+      "text": "Disable encryption for EU data"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Keeping Bedrock invocation, data sources, and vector stores within an EU Region meets EU data residency requirements. Cheapest-Region routing, global replication, and disabling encryption violate residency and security requirements."
+},
+{
+  "id": "q008",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "After switching to a different embeddings model, retrieval quality drops sharply for existing documents. What is the likely cause and fix?",
+  "options": [
+    {
+      "id": "a",
+      "text": "The index still holds vectors from the old model; re-embed and re-index all documents with the new model"
+    },
+    {
+      "id": "b",
+      "text": "Temperature is too low; raise it"
+    },
+    {
+      "id": "c",
+      "text": "The system prompt is missing; add one"
+    },
+    {
+      "id": "d",
+      "text": "Provisioned Throughput is disabled; enable it"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Query and document vectors must come from the same embeddings model; switching models requires re-embedding and re-indexing all documents so the spaces match. Temperature, system prompt, and Provisioned Throughput do not cause this mismatch."
+},
+{
+  "id": "q009",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A knowledge base must ingest scanned PDFs whose text is embedded in images. What must occur so the content becomes searchable?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use parsing/OCR-capable processing to extract text from the images during ingestion"
+    },
+    {
+      "id": "b",
+      "text": "Store the PDFs as-is; image text is automatically searchable without extraction"
+    },
+    {
+      "id": "c",
+      "text": "Lower the temperature to read the images"
+    },
+    {
+      "id": "d",
+      "text": "Convert the PDFs to audio"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Scanned PDFs need OCR/parsing to extract text from images during ingestion so the content can be chunked, embedded, and searched. Storing as-is without extraction leaves image text unsearchable, and temperature or audio conversion do not extract text."
+},
+{
+  "id": "q010",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants to reduce irrelevant results by combining exact-term matching with semantic matching in a single retrieval step. Which technique is this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Hybrid search"
+    },
+    {
+      "id": "b",
+      "text": "Batch inference"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "Model distillation"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Hybrid search combines keyword (exact-term) and semantic (vector) matching to improve relevance in one retrieval step. Batch inference, Provisioned Throughput, and model distillation are unrelated to retrieval matching."
+},
+{
+  "id": "q011",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An enterprise requires that data transferred between its application and Amazon Bedrock is protected in transit. Which control provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "TLS encryption for data in transit to the Bedrock endpoints"
+    },
+    {
+      "id": "b",
+      "text": "Storing data unencrypted for speed"
+    },
+    {
+      "id": "c",
+      "text": "Sending data over plain HTTP"
+    },
+    {
+      "id": "d",
+      "text": "Disabling all encryption"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "TLS encrypts data in transit to Bedrock endpoints, protecting it from interception. Unencrypted storage, plain HTTP, and disabling encryption expose data in transit."
+},
+{
+  "id": "q012",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A company needs its GenAI data platform to meet strict compliance. Which TWO statements about Amazon Bedrock support compliance planning? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Bedrock supports encryption of data at rest and in transit"
+    },
+    {
+      "id": "b",
+      "text": "Bedrock does not use customer prompts/completions to train the base models"
+    },
+    {
+      "id": "c",
+      "text": "Bedrock automatically publishes customer data publicly"
+    },
+    {
+      "id": "d",
+      "text": "Bedrock requires disabling IAM to function"
+    },
+    {
+      "id": "e",
+      "text": "Bedrock stores all customer data in a shared public dataset"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "Bedrock supports encryption at rest/in transit and does not use customer prompts or completions to train base models, both relevant to compliance. It does not publish customer data publicly, require disabling IAM, or store data in a shared public dataset."
+},
+{
+  "id": "q013",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A retriever returns 20 chunks per query, and the model's answers become unfocused and costly. Which adjustment most directly addresses this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Reduce the number of retrieved results (top-k) to the most relevant few"
+    },
+    {
+      "id": "b",
+      "text": "Increase max output tokens"
+    },
+    {
+      "id": "c",
+      "text": "Raise the temperature"
+    },
+    {
+      "id": "d",
+      "text": "Add more documents to the corpus"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Lowering top-k to return only the most relevant chunks sharpens focus and cuts token cost. Increasing output tokens, raising temperature, and adding documents do not fix over-retrieval."
+},
+{
+  "id": "q014",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A knowledge base must scale to hundreds of millions of vectors with managed operations. Which characteristic should guide the vector store choice?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Choose a managed vector store that scales to the required vector volume with acceptable latency and cost"
+    },
+    {
+      "id": "b",
+      "text": "Choose the store with the smallest maximum capacity"
+    },
+    {
+      "id": "c",
+      "text": "Choose any store since scale never matters"
+    },
+    {
+      "id": "d",
+      "text": "Choose a messaging queue as the vector store"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "At large scale, selecting a managed vector store that meets the required vector volume, latency, and cost is essential. Minimal-capacity stores, ignoring scale, and using a message queue as a vector store are inappropriate."
+},
+{
+  "id": "q015",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants generated answers to include links back to the exact source passages for user trust. Which retrieval feature provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Source attribution/citations for the retrieved passages used in the answer"
+    },
+    {
+      "id": "b",
+      "text": "Higher temperature"
+    },
+    {
+      "id": "c",
+      "text": "Larger embedding dimension only"
+    },
+    {
+      "id": "d",
+      "text": "Provisioned Throughput"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Source attribution/citations link answers to the exact passages used, building user trust and verifiability. Temperature, embedding dimension, and Provisioned Throughput do not provide citations."
+},
+{
+  "id": "q016",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "Access to the documents behind a knowledge base must be limited to specific IAM principals. Which mechanism enforces this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "IAM policies controlling access to the data sources and knowledge base"
+    },
+    {
+      "id": "b",
+      "text": "Making the S3 data public"
+    },
+    {
+      "id": "c",
+      "text": "Removing all authentication"
+    },
+    {
+      "id": "d",
+      "text": "Sharing root credentials with the team"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "IAM policies restrict which principals can access the knowledge base and its data sources, enforcing least privilege. Public data, removing authentication, and sharing root credentials violate security best practices."
+},
+{
+  "id": "q017",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants automatic, scheduled refresh of a knowledge base whenever the underlying data changes on a cadence. Which AWS service can trigger the sync on a schedule?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon EventBridge (scheduled rule) to trigger the ingestion job"
+    },
+    {
+      "id": "b",
+      "text": "Amazon Rekognition"
+    },
+    {
+      "id": "c",
+      "text": "Amazon Polly"
+    },
+    {
+      "id": "d",
+      "text": "AWS Shield"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon EventBridge scheduled rules can trigger knowledge base ingestion jobs automatically on a cadence. Rekognition, Polly, and Shield do not schedule ingestion."
+},
+{
+  "id": "q018",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A regulated customer asks whether a specific foundation model and Bedrock are eligible for their compliance program (e.g., HIPAA). Where should the team confirm eligibility and shared-responsibility details?",
+  "options": [
+    {
+      "id": "a",
+      "text": "AWS compliance resources/documentation (e.g., AWS Artifact and service compliance pages) for Bedrock"
+    },
+    {
+      "id": "b",
+      "text": "A social media post"
+    },
+    {
+      "id": "c",
+      "text": "The model's temperature setting"
+    },
+    {
+      "id": "d",
+      "text": "The vector index size"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "AWS compliance documentation and resources (such as AWS Artifact and service compliance pages) state which programs Bedrock supports and the shared-responsibility details. Social media, temperature, and index size do not establish compliance eligibility."
+},
+{
+  "id": "q019",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A company must retain the ability to reproduce which document version informed a past answer for audit. Which practice supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Maintain document versioning/lineage and store references to the source version used"
+    },
+    {
+      "id": "b",
+      "text": "Overwrite documents with no version history"
+    },
+    {
+      "id": "c",
+      "text": "Delete all sources after each answer"
+    },
+    {
+      "id": "d",
+      "text": "Disable metadata and logging"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Versioning and lineage, with stored references to the version used, let the team reproduce which document informed a past answer. Overwriting without history, deleting sources, and disabling metadata/logging prevent auditability."
+},
+{
+  "id": "q020",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants to improve retrieval by reordering candidate results with a dedicated model that judges query-document relevance. Which component provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "A reranking model applied after initial retrieval"
+    },
+    {
+      "id": "b",
+      "text": "A text-to-speech model"
+    },
+    {
+      "id": "c",
+      "text": "A guardrail word filter"
+    },
+    {
+      "id": "d",
+      "text": "Provisioned Throughput"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "A reranking model reorders retrieved candidates by judged relevance to the query, improving final result quality. Text-to-speech, word filters, and Provisioned Throughput do not rerank results."
+},
+{
+  "id": "q021",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A vector store integration requires that embeddings are normalized consistently so similarity scores are comparable. Why does consistency matter?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Inconsistent preprocessing/normalization between indexing and query time distorts similarity and harms retrieval"
+    },
+    {
+      "id": "b",
+      "text": "Normalization has no effect on similarity"
+    },
+    {
+      "id": "c",
+      "text": "Only the query needs normalization, never the documents"
+    },
+    {
+      "id": "d",
+      "text": "Normalization increases the model's temperature"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Consistent embedding preprocessing/normalization at indexing and query time keeps similarity scores comparable; inconsistency distorts retrieval. Normalization does affect similarity, both sides must be consistent, and it is unrelated to temperature."
+},
+{
+  "id": "q022",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team needs a fully managed AWS-native vector store that integrates with Bedrock Knowledge Bases and supports large-scale semantic search without managing servers. Which option fits?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon OpenSearch Serverless vector engine"
+    },
+    {
+      "id": "b",
+      "text": "A single Amazon EC2 instance running a script"
+    },
+    {
+      "id": "c",
+      "text": "Amazon SQS"
+    },
+    {
+      "id": "d",
+      "text": "Amazon SNS"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon OpenSearch Serverless with the vector engine is a fully managed, AWS-native, serverless vector store integrated with Bedrock Knowledge Bases. A single EC2 script is self-managed, and SQS/SNS are messaging services, not vector stores."
+},
+{
+  "id": "q023",
+  "domain": "Foundation Model Integration, Data Management, and Compliance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A knowledge base must pull content from a CRM (Salesforce) and a public documentation website in addition to Amazon S3. What is the appropriate way to bring in these sources?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Configure the relevant knowledge base data source connectors (e.g., Salesforce, web crawler) alongside the S3 source"
+    },
+    {
+      "id": "b",
+      "text": "Manually copy each record into the system prompt"
+    },
+    {
+      "id": "c",
+      "text": "Convert the CRM to audio and upload it"
+    },
+    {
+      "id": "d",
+      "text": "Disable ingestion and paste content per query"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Bedrock Knowledge Bases support multiple data source connectors (such as Salesforce and a web crawler) that can be configured alongside an S3 source to ingest content automatically. Manual copying, audio conversion, and per-query pasting are not scalable ingestion methods."
+},
+{
+  "id": "q024",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "When fine-tuning a model on Amazon Bedrock, the training data must be provided in a specific structured format of prompt-completion examples. Where is this training data typically stored for the job?",
+  "options": [
+    {
+      "id": "a",
+      "text": "In Amazon S3, formatted as the required prompt/completion examples (e.g., JSONL)"
+    },
+    {
+      "id": "b",
+      "text": "In an Amazon SNS topic"
+    },
+    {
+      "id": "c",
+      "text": "In the model's system prompt"
+    },
+    {
+      "id": "d",
+      "text": "In a text-to-image model"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Fine-tuning jobs read structured prompt/completion training data (commonly JSONL) from Amazon S3. SNS topics, system prompts, and image models are not where fine-tuning training datasets are provided."
+},
+{
+  "id": "q025",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "After fine-tuning (customizing) a model on Amazon Bedrock, what is required to run inference against the customized model in production with dedicated capacity?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Purchase Provisioned Throughput for the customized model"
+    },
+    {
+      "id": "b",
+      "text": "Nothing is needed; custom models run free with unlimited capacity"
+    },
+    {
+      "id": "c",
+      "text": "Convert the model into an S3 bucket"
+    },
+    {
+      "id": "d",
+      "text": "Use Amazon Polly to serve it"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Running a customized (fine-tuned) model in production typically requires Provisioned Throughput to allocate dedicated capacity for it. Custom models are not free/unlimited, and they are not served via S3 or Polly."
+},
+{
+  "id": "q026",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A Bedrock agent uses an action group, but the company prefers to execute the function itself in its own backend rather than have Bedrock invoke a Lambda directly. Which capability supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Return of control, where the agent returns the function call for the application to execute and then continue"
+    },
+    {
+      "id": "b",
+      "text": "Disabling the agent entirely"
+    },
+    {
+      "id": "c",
+      "text": "Storing the function in the vector store"
+    },
+    {
+      "id": "d",
+      "text": "Using a text-to-image model to run the function"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Return of control lets the agent hand the requested function call back to the application to execute in its own backend, then resume with the result. Disabling the agent, storing functions in a vector store, and image models do not provide this."
+},
+{
+  "id": "q027",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A generative workflow must branch: if a request is a complaint, route to one prompt; if a question, route to another. Which Amazon Bedrock capability builds this conditional flow visually?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Bedrock Flows with conditional routing between steps"
+    },
+    {
+      "id": "b",
+      "text": "Amazon Macie"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "AWS Shield"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon Bedrock Flows lets developers build multi-step generative workflows with conditional routing between steps. Macie, Provisioned Throughput, and Shield do not build conditional generative workflows."
+},
+{
+  "id": "q028",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A developer needs consistent low-latency streaming chat responses from multiple models using one interface. Which API supports streaming with a unified model interface?",
+  "options": [
+    {
+      "id": "a",
+      "text": "The Converse API with streaming (ConverseStream)"
+    },
+    {
+      "id": "b",
+      "text": "The S3 ListObjects API"
+    },
+    {
+      "id": "c",
+      "text": "The Rekognition DetectFaces API"
+    },
+    {
+      "id": "d",
+      "text": "The SNS Publish API"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "The Converse API supports streaming (ConverseStream) through a unified, model-agnostic interface. ListObjects (storage), DetectFaces (vision), and Publish (messaging) do not provide unified streaming inference."
+},
+{
+  "id": "q029",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team must run a one-time job to generate embeddings/summaries for millions of records where latency is not a concern, using S3 for input and output. Which Amazon Bedrock capability fits?",
+  "options": [
+    {
+      "id": "a",
+      "text": "A batch inference job reading input from S3 and writing results to S3"
+    },
+    {
+      "id": "b",
+      "text": "Real-time synchronous calls for each record"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput sized for constant peak"
+    },
+    {
+      "id": "d",
+      "text": "Streaming responses to a browser"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "A Bedrock batch inference job processes large datasets asynchronously with S3 input/output, ideal when latency is not a concern and cost matters. Per-record synchronous calls, always-peak Provisioned Throughput, and browser streaming are not suited to large offline batch jobs."
+},
+{
+  "id": "q030",
+  "domain": "Implementation and Integration",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A developer wants reliable, controllable generation for a structured extraction task. Which TWO settings/practices help? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use a low temperature for more deterministic output"
+    },
+    {
+      "id": "b",
+      "text": "Define a strict output schema (tool use / structured output)"
+    },
+    {
+      "id": "c",
+      "text": "Set temperature to the maximum for structured extraction"
+    },
+    {
+      "id": "d",
+      "text": "Omit any instructions about the output format"
+    },
+    {
+      "id": "e",
+      "text": "Randomize the model choice per call"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "A low temperature yields more deterministic output, and a strict output schema constrains structure for reliable extraction. Maximum temperature, omitting format instructions, and randomizing the model reduce reliability."
+},
+{
+  "id": "q031",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A model must call a weather API and a calendar API within a single conversation, choosing which to call based on the user's request. Which capability enables the model to select and invoke these tools?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Tool use / function calling with multiple tool definitions"
+    },
+    {
+      "id": "b",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "c",
+      "text": "Vector quantization"
+    },
+    {
+      "id": "d",
+      "text": "A KMS key policy"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Tool use/function calling with multiple tool definitions lets the model choose and request the appropriate tool per request. Provisioned Throughput, quantization, and KMS policies do not enable tool selection."
+},
+{
+  "id": "q032",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "To ensure a fine-tuned model behaves as intended before wide release, the team wants to deploy it to a limited audience first. Which practice supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Roll out the customized model to a small segment and monitor before expanding (staged rollout)"
+    },
+    {
+      "id": "b",
+      "text": "Release to all users immediately with no monitoring"
+    },
+    {
+      "id": "c",
+      "text": "Never test the customized model"
+    },
+    {
+      "id": "d",
+      "text": "Delete the base model"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "A staged rollout to a small segment with monitoring reduces risk before full release of a customized model. Immediate full release without monitoring, no testing, and deleting the base model are unsafe or nonsensical."
+},
+{
+  "id": "q033",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An application must repeatedly call Bedrock and safely retry without causing duplicate side effects in downstream systems. Which practice helps ensure safe retries?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Design downstream actions to be idempotent (e.g., idempotency keys) so retries do not duplicate effects"
+    },
+    {
+      "id": "b",
+      "text": "Retry with no safeguards and accept duplicates"
+    },
+    {
+      "id": "c",
+      "text": "Never retry, even on transient errors"
+    },
+    {
+      "id": "d",
+      "text": "Send each request twice on purpose"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Idempotent downstream actions (using idempotency keys) let retries occur safely without duplicate side effects. Unsafe retries, never retrying transient errors, and intentionally duplicating requests cause problems."
+},
+{
+  "id": "q034",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A developer wants to inject dynamic values (like a customer name and order ID) into a standardized prompt at runtime. Which approach is appropriate?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use a prompt template with variables/placeholders filled at runtime"
+    },
+    {
+      "id": "b",
+      "text": "Hardcode a new prompt for every customer"
+    },
+    {
+      "id": "c",
+      "text": "Store the values in the KMS key"
+    },
+    {
+      "id": "d",
+      "text": "Use a text-to-image model to insert values"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "A prompt template with variables/placeholders lets dynamic values be inserted at runtime in a standardized way. Hardcoding per-customer prompts is unmaintainable, and KMS keys and image models do not inject prompt values."
+},
+{
+  "id": "q035",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A GenAI pipeline must coordinate retrieval, model calls, and writes to a database with error handling and visibility into each step. Which service orchestrates this reliably?",
+  "options": [
+    {
+      "id": "a",
+      "text": "AWS Step Functions"
+    },
+    {
+      "id": "b",
+      "text": "Amazon CloudFront"
+    },
+    {
+      "id": "c",
+      "text": "Amazon Polly"
+    },
+    {
+      "id": "d",
+      "text": "Amazon Rekognition"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "AWS Step Functions orchestrates multi-step pipelines with error handling and per-step visibility. CloudFront, Polly, and Rekognition do not orchestrate workflows."
+},
+{
+  "id": "q036",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A single application needs to route requests across Regions for resiliency while keeping one consistent way to invoke the model. Which Amazon Bedrock capability supports invoking across Regions transparently?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Cross-region inference (inference profiles)"
+    },
+    {
+      "id": "b",
+      "text": "A single-Region on-demand call only"
+    },
+    {
+      "id": "c",
+      "text": "Amazon SQS"
+    },
+    {
+      "id": "d",
+      "text": "Amazon Macie"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Cross-region inference (using inference profiles) lets an application invoke a model with capacity across multiple Regions for resiliency and throughput. A single-Region-only call lacks that resiliency, and SQS and Macie do not provide cross-region inference."
+},
+{
+  "id": "q037",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants to constrain a model to end its answer after producing a JSON object and not continue with extra prose. Which parameter helps?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Stop sequences that end generation after the JSON closes"
+    },
+    {
+      "id": "b",
+      "text": "A higher temperature"
+    },
+    {
+      "id": "c",
+      "text": "A larger embedding dimension"
+    },
+    {
+      "id": "d",
+      "text": "Provisioned Throughput"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Stop sequences end generation when a specified token/string appears (such as the closing of a JSON object), preventing extra prose. Temperature, embedding dimension, and Provisioned Throughput do not stop generation at a delimiter."
+},
+{
+  "id": "q038",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An assistant must choose a model optimized for complex multi-step reasoning rather than raw speed. What should guide the selection?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Select the model based on the capability required (reasoning strength) balanced against latency and cost"
+    },
+    {
+      "id": "b",
+      "text": "Always pick the fastest model regardless of task"
+    },
+    {
+      "id": "c",
+      "text": "Always pick the cheapest model regardless of task"
+    },
+    {
+      "id": "d",
+      "text": "Pick a text-to-image model for reasoning"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Model selection should match the required capability (here, reasoning) while balancing latency and cost. Always choosing fastest or cheapest ignores capability needs, and an image model cannot perform text reasoning."
+},
+{
+  "id": "q039",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A developer wants a single Bedrock call that retrieves from a knowledge base and generates a cited answer, with a guardrail applied. Which combination achieves this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use RetrieveAndGenerate with a knowledge base and attach a guardrail to the request"
+    },
+    {
+      "id": "b",
+      "text": "Use only the S3 GetObject API"
+    },
+    {
+      "id": "c",
+      "text": "Use Amazon Polly with a guardrail"
+    },
+    {
+      "id": "d",
+      "text": "Use Provisioned Throughput to retrieve documents"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "RetrieveAndGenerate performs retrieval plus grounded, citable generation in one call, and a guardrail can be attached to enforce safety. GetObject, Polly, and Provisioned Throughput do not perform grounded RAG generation."
+},
+{
+  "id": "q040",
+  "domain": "Implementation and Integration",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A production assistant must be both maintainable and safe. Which TWO practices support this? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Centrally manage and version prompts"
+    },
+    {
+      "id": "b",
+      "text": "Attach guardrails to model/agent invocations"
+    },
+    {
+      "id": "c",
+      "text": "Hardcode different prompts in every service with no versioning"
+    },
+    {
+      "id": "d",
+      "text": "Disable all safety filters in production"
+    },
+    {
+      "id": "e",
+      "text": "Use the maximum temperature for all responses"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "Centralized, versioned prompt management improves maintainability, and attaching guardrails improves safety. Hardcoded unversioned prompts, disabled safety filters, and maximum temperature everywhere undermine both goals."
+},
+{
+  "id": "q041",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A conversational assistant must include the last several turns so responses stay coherent, without exceeding the context window. Which practice manages this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Manage conversation history (e.g., include recent turns or summarize older ones) to fit the context window"
+    },
+    {
+      "id": "b",
+      "text": "Always send the entire unbounded history regardless of size"
+    },
+    {
+      "id": "c",
+      "text": "Send no history ever"
+    },
+    {
+      "id": "d",
+      "text": "Store history in a KMS key"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Managing conversation history—including recent turns and summarizing older context—keeps the assistant coherent within the context window. Sending unbounded history can exceed limits, no history loses coherence, and KMS keys do not store history."
+},
+{
+  "id": "q042",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A model must extract structured fields from messy invoices, and accuracy improves when the prompt includes a few worked examples of input and the desired extracted output. Which technique is this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Few-shot prompting with example input/output pairs"
+    },
+    {
+      "id": "b",
+      "text": "Continued pre-training on unlabeled data"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "Cross-region inference"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Few-shot prompting includes example input/output pairs in the prompt to guide the model toward the desired extraction format and improve accuracy. Continued pre-training is a training-time method, and Provisioned Throughput and cross-region inference are capacity/performance features."
+},
+{
+  "id": "q043",
+  "domain": "Implementation and Integration",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A GenAI pipeline should decouple the user-facing API from slower back-end processing so spikes are absorbed and work is handled reliably. Which integration pattern fits?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Place a queue (e.g., Amazon SQS) between the API and the processing workers for asynchronous, decoupled handling"
+    },
+    {
+      "id": "b",
+      "text": "Have the API call the model synchronously and block during spikes"
+    },
+    {
+      "id": "c",
+      "text": "Store requests in the model's system prompt"
+    },
+    {
+      "id": "d",
+      "text": "Use a text-to-image model to queue work"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Putting a queue such as Amazon SQS between the API and processing workers decouples them, absorbs spikes, and enables reliable asynchronous handling. Synchronous blocking, system-prompt storage, and image models do not provide durable decoupling."
+},
+{
+  "id": "q044",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A guardrail must block harmful content but the team finds some borderline content still passes. Which guardrail setting lets them make the content filter stricter?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Increase the content filter strength (e.g., to a higher/High setting) for the relevant categories"
+    },
+    {
+      "id": "b",
+      "text": "Increase the model temperature"
+    },
+    {
+      "id": "c",
+      "text": "Enable Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "Increase the embedding dimension"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Bedrock Guardrails content filters have configurable strength levels; raising the strength for relevant categories blocks more borderline content. Temperature, Provisioned Throughput, and embedding dimension do not change filter strictness."
+},
+{
+  "id": "q045",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A support bot must decline to give medical or legal advice as a matter of policy. Which guardrail capability best enforces this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Configure denied topics for medical and legal advice"
+    },
+    {
+      "id": "b",
+      "text": "Increase the top-k retrieval"
+    },
+    {
+      "id": "c",
+      "text": "Enable cross-region inference"
+    },
+    {
+      "id": "d",
+      "text": "Raise the temperature"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Denied topics in Bedrock Guardrails enforce refusal on defined subjects such as medical or legal advice. Retrieval count, cross-region inference, and temperature do not restrict topics."
+},
+{
+  "id": "q046",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants inputs screened for policy violations before the prompt is sent to any model. Which capability enables pre-invocation screening?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use the ApplyGuardrail API (or an input guardrail) to evaluate the input before model invocation"
+    },
+    {
+      "id": "b",
+      "text": "Only evaluate outputs after generation"
+    },
+    {
+      "id": "c",
+      "text": "Increase Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "Disable guardrails on inputs"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "ApplyGuardrail (or an input guardrail) can evaluate the input against policies before it reaches a model, enabling pre-invocation screening. Output-only evaluation, Provisioned Throughput, and disabling input guardrails do not screen inputs."
+},
+{
+  "id": "q047",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An IAM policy for a service that only needs to invoke one specific model should follow least privilege. Which policy is appropriate?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Allow bedrock:InvokeModel only on the specific model ARN, and nothing broader"
+    },
+    {
+      "id": "b",
+      "text": "Allow bedrock:* on all resources"
+    },
+    {
+      "id": "c",
+      "text": "Allow *:* on all resources"
+    },
+    {
+      "id": "d",
+      "text": "Deny all Bedrock actions so the service cannot function"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Least privilege grants only bedrock:InvokeModel on the specific model ARN needed. Broad bedrock:* or *:* over-permissions the service, and denying all actions breaks required functionality."
+},
+{
+  "id": "q048",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A company must ensure Bedrock traffic from private subnets never traverses the public internet and cannot reach arbitrary endpoints. Which combination applies?",
+  "options": [
+    {
+      "id": "a",
+      "text": "A VPC interface endpoint for Bedrock plus an endpoint policy restricting allowed actions/principals"
+    },
+    {
+      "id": "b",
+      "text": "A public NAT gateway with open egress"
+    },
+    {
+      "id": "c",
+      "text": "A public IP on every instance"
+    },
+    {
+      "id": "d",
+      "text": "An open security group allowing all outbound"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "A VPC interface endpoint (PrivateLink) keeps Bedrock traffic private, and an endpoint policy restricts allowed actions and principals. Public NAT egress, public IPs, and open security groups route traffic publicly and broadly."
+},
+{
+  "id": "q049",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "For a compliance audit, the team must produce a record of every Bedrock control-plane and data-plane action, including who performed it. Which combination provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "AWS CloudTrail for API activity and Bedrock model invocation logging for prompt/response records"
+    },
+    {
+      "id": "b",
+      "text": "Only Amazon CloudFront access logs"
+    },
+    {
+      "id": "c",
+      "text": "Only Amazon SQS metrics"
+    },
+    {
+      "id": "d",
+      "text": "Only the vector index statistics"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "CloudTrail records API actions and identities, and Bedrock model invocation logging captures prompt/response records, together supporting the audit. CloudFront logs, SQS metrics, and index statistics do not provide this audit coverage."
+},
+{
+  "id": "q050",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An organization must ensure no team can enable or invoke unapproved foundation models across all member accounts. Which control enforces this centrally?",
+  "options": [
+    {
+      "id": "a",
+      "text": "A service control policy (SCP) restricting Bedrock model actions across the organization"
+    },
+    {
+      "id": "b",
+      "text": "A single IAM user policy in one account"
+    },
+    {
+      "id": "c",
+      "text": "A CloudWatch alarm"
+    },
+    {
+      "id": "d",
+      "text": "A larger embedding dimension"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "An SCP applied across the organization restricts Bedrock model actions in all member accounts centrally. A single-account IAM policy is not org-wide, and alarms and embedding dimension do not enforce model governance."
+},
+{
+  "id": "q051",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A team is hardening a GenAI application's security posture. Which TWO measures are appropriate? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Store third-party API keys used by tools in AWS Secrets Manager"
+    },
+    {
+      "id": "b",
+      "text": "Apply least-privilege IAM roles to agent/tool execution"
+    },
+    {
+      "id": "c",
+      "text": "Embed long-term credentials directly in client-side code"
+    },
+    {
+      "id": "d",
+      "text": "Grant AdministratorAccess to all application roles"
+    },
+    {
+      "id": "e",
+      "text": "Log secrets in plaintext for easier debugging"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "Storing secrets in Secrets Manager and applying least-privilege IAM roles harden security. Embedding credentials in client code, granting AdministratorAccess broadly, and logging secrets in plaintext weaken it."
+},
+{
+  "id": "q052",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team improves a guardrail and must move the change to production safely while keeping the ability to roll back. Which capability supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Guardrail versioning, referencing a specific tested version in production"
+    },
+    {
+      "id": "b",
+      "text": "Increasing the model temperature"
+    },
+    {
+      "id": "c",
+      "text": "Enabling cross-region inference"
+    },
+    {
+      "id": "d",
+      "text": "Raising the top-k value"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Guardrail versioning lets the team promote a tested version to production and roll back if needed. Temperature, cross-region inference, and top-k do not manage guardrail change control."
+},
+{
+  "id": "q053",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A Responsible AI review requires checking whether the assistant's outputs exhibit bias across demographic groups. Which activity addresses this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Evaluate outputs for fairness/bias using appropriate evaluation methods and datasets"
+    },
+    {
+      "id": "b",
+      "text": "Increase the temperature to add variety"
+    },
+    {
+      "id": "c",
+      "text": "Disable logging to reduce noise"
+    },
+    {
+      "id": "d",
+      "text": "Remove all guardrails"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Evaluating outputs for fairness and bias with appropriate methods and datasets addresses the Responsible AI concern. Higher temperature, disabled logging, and removed guardrails do not assess or mitigate bias."
+},
+{
+  "id": "q054",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants outputs that include customer phone numbers to be automatically masked while still allowing the rest of the response. Which guardrail behavior fits?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Configure PII handling to mask/redact the phone numbers rather than block the entire response"
+    },
+    {
+      "id": "b",
+      "text": "Block every response that contains any digit"
+    },
+    {
+      "id": "c",
+      "text": "Disable PII handling entirely"
+    },
+    {
+      "id": "d",
+      "text": "Increase Provisioned Throughput"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Configuring PII handling to mask/redact specific entities (like phone numbers) lets the rest of the response proceed while protecting the PII. Blocking all responses with digits is over-broad, disabling PII handling exposes data, and Provisioned Throughput is unrelated."
+},
+{
+  "id": "q055",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A customer wants assurance about how a specific AWS AI service handles data and its intended use and limitations. Which resource documents this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "The AWS AI Service Card for that service"
+    },
+    {
+      "id": "b",
+      "text": "The service's pricing page only"
+    },
+    {
+      "id": "c",
+      "text": "A CloudWatch dashboard"
+    },
+    {
+      "id": "d",
+      "text": "The vector index size"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "AWS AI Service Cards document intended use, limitations, and responsible-AI/data-handling considerations for AWS AI services. Pricing pages, dashboards, and index size do not provide this."
+},
+{
+  "id": "q056",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An application must ensure that even if a prompt tries to trick the model into revealing its system instructions, the attempt is detected. Which guardrail capability helps?",
+  "options": [
+    {
+      "id": "a",
+      "text": "The prompt attack (injection/jailbreak) filter in Amazon Bedrock Guardrails"
+    },
+    {
+      "id": "b",
+      "text": "S3 lifecycle rules"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "A larger vector index"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "The prompt attack filter detects jailbreak/prompt-injection attempts, including efforts to extract system instructions. S3 lifecycle rules, Provisioned Throughput, and index size do not detect prompt attacks."
+},
+{
+  "id": "q057",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A company must confirm that data it sends to Amazon Bedrock is not shared with third-party model providers for training. Which statement is accurate?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Bedrock does not share customer prompts/completions with providers to train their models; data stays in the customer's control"
+    },
+    {
+      "id": "b",
+      "text": "Bedrock forwards all prompts to providers for training by default"
+    },
+    {
+      "id": "c",
+      "text": "Bedrock publishes prompts to a public dataset"
+    },
+    {
+      "id": "d",
+      "text": "Bedrock requires opting out via a physical letter"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon Bedrock does not share customer prompts and completions with model providers for training, and the data remains under the customer's control. Bedrock does not forward prompts for training, publish them publicly, or require a physical opt-out."
+},
+{
+  "id": "q058",
+  "domain": "AI Safety, Security, and Governance",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A governance team wants visibility into how often guardrails block content, to monitor policy effectiveness and detect abuse trends. Which approach provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Monitor guardrail intervention metrics/logs in Amazon CloudWatch and review invocation logs"
+    },
+    {
+      "id": "b",
+      "text": "Disable guardrails to reduce log volume"
+    },
+    {
+      "id": "c",
+      "text": "Rely only on occasional user complaints"
+    },
+    {
+      "id": "d",
+      "text": "Increase the embedding dimension"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Monitoring guardrail intervention metrics and logs in CloudWatch (with invocation logs) gives governance visibility into how often and why content is blocked. Disabling guardrails, relying on complaints, and changing embedding dimension do not provide this visibility."
+},
+{
+  "id": "q059",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A nightly job must summarize a very large backlog of documents at the lowest possible cost, with results available the next morning. Which option is MOST cost-effective?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Bedrock batch inference"
+    },
+    {
+      "id": "b",
+      "text": "Real-time on-demand calls throughout the night"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput sized for peak 24/7"
+    },
+    {
+      "id": "d",
+      "text": "Streaming each summary to a browser"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Batch inference is the most cost-effective way to process a large backlog asynchronously when results are needed later. Continuous on-demand calls and always-peak Provisioned Throughput cost more, and streaming is a latency feature, not a batch cost optimization."
+},
+{
+  "id": "q060",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A chatbot repeatedly sends the same lengthy instructions and reference text with every request. Which Bedrock capability reduces the cost and latency of reprocessing that repeated content?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Prompt caching"
+    },
+    {
+      "id": "b",
+      "text": "A larger embedding dimension"
+    },
+    {
+      "id": "c",
+      "text": "Cross-region inference"
+    },
+    {
+      "id": "d",
+      "text": "S3 Intelligent-Tiering"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Prompt caching reuses repeated prompt content across requests, cutting the cost and latency of reprocessing it. Embedding dimension, cross-region inference, and S3 tiering do not cache repeated prompt content."
+},
+{
+  "id": "q061",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A high-traffic production endpoint needs predictable throughput and consistent latency for a specific model. Which Bedrock purchasing option is designed for this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "b",
+      "text": "Batch inference"
+    },
+    {
+      "id": "c",
+      "text": "On-demand with no commitment"
+    },
+    {
+      "id": "d",
+      "text": "Streaming responses"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Provisioned Throughput provides dedicated, predictable capacity and consistent latency for steady high-traffic production use. Batch is offline, on-demand lacks guarantees, and streaming is a latency feature, not a capacity option."
+},
+{
+  "id": "q062",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants to lower ongoing inference cost and latency by replacing a large model with a smaller one that was trained to imitate it for their task. Which capability produces the smaller model?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Model Distillation"
+    },
+    {
+      "id": "b",
+      "text": "Prompt Management"
+    },
+    {
+      "id": "c",
+      "text": "Guardrails"
+    },
+    {
+      "id": "d",
+      "text": "Cross-region inference"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Model Distillation creates a smaller student model that imitates a larger teacher for a task, reducing cost and latency. Prompt Management, Guardrails, and cross-region inference do not produce distilled models."
+},
+{
+  "id": "q063",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A team must reduce GenAI latency for interactive users. Which TWO approaches help? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "Stream responses so tokens appear as they are generated"
+    },
+    {
+      "id": "b",
+      "text": "Right-size to a smaller or latency-optimized model where quality allows"
+    },
+    {
+      "id": "c",
+      "text": "Always use the largest flagship model for every request"
+    },
+    {
+      "id": "d",
+      "text": "Maximize the number of retrieved chunks per query"
+    },
+    {
+      "id": "e",
+      "text": "Set the maximum output token limit as high as possible on all calls"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "Streaming improves perceived latency, and right-sizing to a smaller/latency-optimized model reduces actual latency. Always using the largest model, maximizing retrieved chunks, and inflating output tokens increase latency."
+},
+{
+  "id": "q064",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "Requests vary from trivial to complex, and the team wants automatic routing to balance cost and quality within a model family. Which capability provides this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Bedrock Intelligent Prompt Routing"
+    },
+    {
+      "id": "b",
+      "text": "Provisioned Throughput sized for peak"
+    },
+    {
+      "id": "c",
+      "text": "Amazon Macie"
+    },
+    {
+      "id": "d",
+      "text": "S3 Intelligent-Tiering"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Intelligent Prompt Routing automatically routes each request to the most appropriate model in a family to balance cost and quality. Peak Provisioned Throughput, Macie, and S3 tiering do not route by request complexity."
+},
+{
+  "id": "q065",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "To keep GenAI costs visible and controllable, a FinOps team wants alerts when spend exceeds a threshold. Which combination supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Use CloudWatch metrics/alarms and AWS Budgets with cost allocation tags"
+    },
+    {
+      "id": "b",
+      "text": "Disable billing to avoid charges"
+    },
+    {
+      "id": "c",
+      "text": "Remove all tags to simplify"
+    },
+    {
+      "id": "d",
+      "text": "Guess spend monthly with no tooling"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "CloudWatch alarms and AWS Budgets, with cost allocation tags, provide visibility and threshold alerts for GenAI spend. Disabling billing, removing tags, and guessing do not provide cost control."
+},
+{
+  "id": "q066",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team reduces cost by using a cheaper model for straightforward tasks while reserving a premium model for hard tasks. What is this practice called?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Right-sizing the model to task complexity"
+    },
+    {
+      "id": "b",
+      "text": "Always using the premium model"
+    },
+    {
+      "id": "c",
+      "text": "Disabling all models"
+    },
+    {
+      "id": "d",
+      "text": "Increasing output tokens"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Right-sizing matches model choice to task complexity, using cheaper models where sufficient and premium models where needed, optimizing cost. Always-premium, disabling models, and increasing output tokens do not right-size cost."
+},
+{
+  "id": "q067",
+  "domain": "Operational Efficiency and Optimization for GenAI Applications",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An application intermittently hits Region capacity limits at peak, causing failures. Which Bedrock capability increases available throughput by leveraging multiple Regions?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Cross-region inference"
+    },
+    {
+      "id": "b",
+      "text": "S3 Glacier"
+    },
+    {
+      "id": "c",
+      "text": "Amazon Polly"
+    },
+    {
+      "id": "d",
+      "text": "AWS WAF"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Cross-region inference leverages capacity across multiple Regions to raise available throughput and resilience at peak. S3 Glacier (archival), Polly (speech), and WAF (web firewall) do not address inference throughput."
+},
+{
+  "id": "q068",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants automatic evaluation of a model's outputs for quality dimensions such as accuracy, robustness, and toxicity on their dataset. Which capability provides built-in metrics for this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Amazon Bedrock Model Evaluation (automatic evaluation)"
+    },
+    {
+      "id": "b",
+      "text": "Amazon Bedrock Guardrails"
+    },
+    {
+      "id": "c",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "d",
+      "text": "Amazon Macie"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Amazon Bedrock Model Evaluation offers automatic evaluation with built-in metrics (such as accuracy, robustness, and toxicity) on your dataset. Guardrails filter content, Provisioned Throughput reserves capacity, and Macie discovers sensitive data."
+},
+{
+  "id": "q069",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "For nuanced qualities like helpfulness and tone that are hard to score automatically, a team wants scalable automated scoring using a capable model as the evaluator. Which technique is appropriate?",
+  "options": [
+    {
+      "id": "a",
+      "text": "LLM-as-a-judge evaluation"
+    },
+    {
+      "id": "b",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "c",
+      "text": "Prompt caching"
+    },
+    {
+      "id": "d",
+      "text": "Cross-region inference"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "LLM-as-a-judge uses a capable model to score nuanced qualities at scale beyond simple automatic metrics. Provisioned Throughput, prompt caching, and cross-region inference are performance/cost features, not evaluation techniques."
+},
+{
+  "id": "q070",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A RAG assistant's answers are grammatically fine but sometimes unsupported by sources. Which evaluation dimension should the team measure to catch this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Faithfulness/groundedness of answers to the retrieved sources"
+    },
+    {
+      "id": "b",
+      "text": "The size of the S3 bucket"
+    },
+    {
+      "id": "c",
+      "text": "The number of IAM users"
+    },
+    {
+      "id": "d",
+      "text": "The DNS TTL value"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Measuring faithfulness/groundedness checks whether answers are supported by the retrieved sources, catching unsupported claims. Bucket size, IAM user count, and DNS TTL are unrelated to answer grounding."
+},
+{
+  "id": "q071",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A Bedrock application returns frequent ThrottlingExceptions during a product launch spike. Which response is appropriate?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Add retries with exponential backoff and increase capacity via quota increase, Provisioned Throughput, or cross-region inference"
+    },
+    {
+      "id": "b",
+      "text": "Remove all error handling"
+    },
+    {
+      "id": "c",
+      "text": "Send requests faster to force them through"
+    },
+    {
+      "id": "d",
+      "text": "Switch the workload to Amazon Rekognition"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Throttling during spikes is addressed with backoff-based retries plus capacity increases (quota increase, Provisioned Throughput, or cross-region inference). Removing error handling, sending faster, and switching to Rekognition do not resolve throttling."
+},
+{
+  "id": "q072",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "A team wants to detect, at runtime, responses that are not grounded in the provided context so they can be blocked or flagged. Which capability supports this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Contextual grounding checks in Amazon Bedrock Guardrails"
+    },
+    {
+      "id": "b",
+      "text": "Provisioned Throughput"
+    },
+    {
+      "id": "c",
+      "text": "S3 Intelligent-Tiering"
+    },
+    {
+      "id": "d",
+      "text": "Amazon CloudFront"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Contextual grounding checks evaluate whether a response is grounded in the provided context at runtime, so ungrounded responses can be blocked or flagged. Provisioned Throughput, S3 tiering, and CloudFront do not evaluate grounding."
+},
+{
+  "id": "q073",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "multi",
+  "correct_count": 2,
+  "question": "A team is setting up production observability for a GenAI application. Which TWO provide useful signals for troubleshooting? (Select TWO.)",
+  "options": [
+    {
+      "id": "a",
+      "text": "CloudWatch metrics and logs (latency, errors, invocations)"
+    },
+    {
+      "id": "b",
+      "text": "Bedrock model invocation logs of prompts and responses"
+    },
+    {
+      "id": "c",
+      "text": "The office Wi-Fi password"
+    },
+    {
+      "id": "d",
+      "text": "The number of unused IAM roles"
+    },
+    {
+      "id": "e",
+      "text": "The company holiday calendar"
+    }
+  ],
+  "correct": [
+    "a",
+    "b"
+  ],
+  "explanation": "CloudWatch metrics/logs and Bedrock model invocation logs provide latency, error, and request/response signals for troubleshooting. A Wi-Fi password, unused IAM role counts, and a holiday calendar are irrelevant to observability."
+},
+{
+  "id": "q074",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "An Amazon Bedrock agent produces a wrong final answer, and the team must see which tools it called and its intermediate reasoning to locate the fault. Which capability exposes this?",
+  "options": [
+    {
+      "id": "a",
+      "text": "The agent trace showing reasoning steps and tool/action-group invocations"
+    },
+    {
+      "id": "b",
+      "text": "Increasing the embedding dimension"
+    },
+    {
+      "id": "c",
+      "text": "Enabling S3 Transfer Acceleration"
+    },
+    {
+      "id": "d",
+      "text": "Disabling guardrails"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "The agent trace shows the agent's intermediate reasoning and the tool/action-group invocations, enabling fault localization. Embedding dimension, S3 Transfer Acceleration, and disabling guardrails do not reveal agent decisions."
+},
+{
+  "id": "q075",
+  "domain": "Testing, Validation, and Troubleshooting",
+  "type": "single",
+  "correct_count": 1,
+  "question": "Before promoting a new model version, a team wants to confirm it does not degrade quality versus the current version on a fixed benchmark. Which practice fits?",
+  "options": [
+    {
+      "id": "a",
+      "text": "Run a comparative evaluation (e.g., Bedrock Model Evaluation) on the benchmark for both versions and compare results"
+    },
+    {
+      "id": "b",
+      "text": "Promote the new version with no comparison"
+    },
+    {
+      "id": "c",
+      "text": "Only compare their prices"
+    },
+    {
+      "id": "d",
+      "text": "Only compare their model IDs"
+    }
+  ],
+  "correct": [
+    "a"
+  ],
+  "explanation": "Running a comparative evaluation on a fixed benchmark for both versions objectively confirms whether quality is maintained before promotion. Promoting without comparison, or comparing only price or model IDs, does not validate quality."
+}
+];
+
+// ===================================================================
+// STATE
+// ===================================================================
+let currentQ      = 0;
+const answers     = {};          // idx -> array of selected option ids
+const flags       = new Set();   // flagged question indices
+let examActive    = false;
+let submitted     = false;
+let blurWarnings  = 0;
+let timeLeft      = EXAM.timeLimitSec;
+let timerInterval = null;
+let results       = null;
+
+// ===================================================================
+// START / RESET
+// ===================================================================
+function startExam() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('exam-ui').style.display = 'block';
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'none';
+  examActive = true;
+  submitted  = false;
+  buildNavGrid();
+  renderQuestion(0);
+  updateHeaderCounts();
+  startTimer();
+  attachVisibilityListeners();
+  window.scrollTo(0, 0);
+}
+
+function resetExam() {
+  currentQ = 0;
+  for (const k in answers) delete answers[k];
+  flags.clear();
+  blurWarnings = 0;
+  timeLeft = EXAM.timeLimitSec;
+  submitted = false;
+  clearInterval(timerInterval);
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'none';
+  startExam();
+}
+
+// ===================================================================
+// TIMER
+// ===================================================================
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      autoSubmit('Time is up. Your exam has been submitted automatically.');
+    }
+  }, 1000);
+}
+function updateTimerDisplay() {
+  const el = document.getElementById('timer');
+  const h = Math.floor(timeLeft / 3600);
+  const m = Math.floor((timeLeft % 3600) / 60);
+  const s = timeLeft % 60;
+  el.textContent = h > 0
+    ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+    : `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  if (timeLeft <= 300) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+// ===================================================================
+// RENDER QUESTION
+// ===================================================================
+function isAnswered(idx) {
+  const q = questions[idx];
+  const a = answers[idx] || [];
+  return a.length === q.correct_count && a.length > 0;
+}
+
+function renderQuestion(idx) {
+  currentQ = idx;
+  const q = questions[idx];
+  const sel = answers[idx] || [];
+  const isMulti = q.type === 'multi';
+
+  const optionsHtml = q.options.map(opt => {
+    const chosen = sel.includes(opt.id);
+    return `
+      <li class="option-item ${chosen ? 'selected' : ''}" onclick="selectOption(${idx}, '${opt.id}')">
+        <span class="opt-letter">${opt.id.toUpperCase()}</span>
+        <span class="opt-label">${escapeHtml(opt.text)}</span>
+      </li>`;
+  }).join('');
+
+  const multiNotice = isMulti
+    ? `<div class="multi-notice">⚠ Multiple response — select exactly ${q.correct_count} answers.</div>`
+    : '';
+
+  document.getElementById('question-container').innerHTML = `
+    <div class="question-card">
+      <div class="q-meta">
+        <span class="q-num-badge">Question ${idx + 1} of ${EXAM.total}</span>
+        <div class="q-tags">
+          <span class="domain-tag">${DOMAIN_SHORT[q.domain] || q.domain}</span>
+          ${isMulti ? '<span class="multi-tag">MULTI-SELECT</span>' : ''}
+        </div>
+      </div>
+      <div class="question-text">${escapeHtml(q.question)}</div>
+      ${multiNotice}
+      <ul class="options-list">${optionsHtml}</ul>
+    </div>`;
+
+  // Nav buttons state
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === questions.length - 1;
+  const flagBtn = document.getElementById('btn-flag');
+  flagBtn.classList.toggle('flagged', flags.has(idx));
+  flagBtn.textContent = flags.has(idx) ? '⚑ Flagged' : '⚑ Flag for Review';
+
+  document.getElementById('mob-current').textContent = idx + 1;
+  updateNavGrid();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===================================================================
+// SELECT OPTION
+// ===================================================================
+function selectOption(idx, optId) {
+  if (submitted) return;
+  const q = questions[idx];
+  let sel = answers[idx] ? answers[idx].slice() : [];
+
+  if (q.type === 'single') {
+    sel = [optId];
+  } else {
+    if (sel.includes(optId)) {
+      sel = sel.filter(x => x !== optId);           // toggle off
+    } else if (sel.length < q.correct_count) {
+      sel.push(optId);                               // add
+    } else {
+      // at limit: replace the earliest selection so the newest click registers
+      sel.shift();
+      sel.push(optId);
+    }
+  }
+  answers[idx] = sel;
+  renderQuestion(idx);
+  updateHeaderCounts();
+}
+
+// ===================================================================
+// NAVIGATION
+// ===================================================================
+function goToNext() { if (currentQ < questions.length - 1) renderQuestion(currentQ + 1); }
+function goToPrev() { if (currentQ > 0) renderQuestion(currentQ - 1); }
+function jumpTo(idx) { renderQuestion(idx); }
+
+function toggleFlag(idx) {
+  if (flags.has(idx)) flags.delete(idx); else flags.add(idx);
+  renderQuestion(idx);
+  updateHeaderCounts();
+}
+
+// ===================================================================
+// NAV GRID + STATS
+// ===================================================================
+function buildNavGrid() {
+  const grid = document.getElementById('nav-grid');
+  grid.innerHTML = questions.map((q, i) =>
+    `<button class="nav-btn" id="nav-${i}" onclick="jumpTo(${i})">${i + 1}</button>`
+  ).join('');
+}
+function updateNavGrid() {
+  questions.forEach((q, i) => {
+    const btn = document.getElementById('nav-' + i);
+    if (!btn) return;
+    btn.className = 'nav-btn';
+    if (isAnswered(i)) btn.classList.add('answered');
+    if (flags.has(i))  btn.classList.add('flagged-q');
+    if (i === currentQ) btn.classList.add('current');
+  });
+}
+function updateHeaderCounts() {
+  let answered = 0;
+  questions.forEach((q, i) => { if (isAnswered(i)) answered++; });
+  const unanswered = questions.length - answered;
+  document.getElementById('hdr-answered').textContent = `${answered}/${EXAM.total}`;
+  document.getElementById('hdr-flagged').textContent  = flags.size;
+  document.getElementById('stat-answered').textContent   = `${answered} / ${EXAM.total}`;
+  document.getElementById('stat-unanswered').textContent = unanswered;
+  document.getElementById('stat-flagged').textContent    = flags.size;
+  document.getElementById('mob-answered').textContent    = answered;
+  document.getElementById('progress-fill').style.width = `${(answered / questions.length) * 100}%`;
+  updateNavGrid();
+}
+
+// ===================================================================
+// SUBMIT
+// ===================================================================
+function trySubmit() {
+  let answered = 0;
+  questions.forEach((q, i) => { if (isAnswered(i)) answered++; });
+  const unanswered = questions.length - answered;
+  const body = document.getElementById('confirm-body');
+  body.innerHTML = unanswered > 0
+    ? `<div class="unanswered-list">You have <strong>${unanswered}</strong> unanswered question(s). Unanswered questions are marked incorrect.</div>Are you sure you want to submit? You cannot change your answers after submitting.`
+    : `All questions answered. Are you sure you want to submit? You cannot change your answers after submitting.`;
+  document.getElementById('confirm-modal').classList.add('show');
+}
+function closeModal()    { document.getElementById('confirm-modal').classList.remove('show'); }
+function confirmSubmit() { closeModal(); doSubmit(false); }
+
+function autoSubmit(msg) {
+  closeModal();
+  doSubmit(true);
+  if (msg) setTimeout(() => alert(msg), 100);
+}
+
+function arraysEqual(a, b) {
+  if (a.length !== b.length) return false;
+  const sa = a.slice().sort(), sb = b.slice().sort();
+  return sa.every((v, i) => v === sb[i]);
+}
+
+function doSubmit(auto) {
+  if (submitted && !auto) return;
+  submitted  = true;
+  examActive = false;
+  clearInterval(timerInterval);
+  removeVisibilityListeners();
+
+  let correct = 0;
+  const domainStats = {};
+  DOMAIN_ORDER.forEach(d => domainStats[d] = { correct: 0, total: 0 });
+  const qResults = [];
+
+  questions.forEach((q, idx) => {
+    const userAns   = answers[idx] || [];
+    const isCorrect = arraysEqual(userAns, q.correct);
+    if (isCorrect) correct++;
+    if (!domainStats[q.domain]) domainStats[q.domain] = { correct: 0, total: 0 };
+    domainStats[q.domain].total++;
+    if (isCorrect) domainStats[q.domain].correct++;
+    qResults.push({ idx, isCorrect, userAns });
+  });
+
+  const pct    = Math.round((correct / questions.length) * 100);
+  const scaled = Math.round(100 + (correct / questions.length) * 900);
+  const passed = scaled >= EXAM.passScaled;
+
+  results = { correct, total: questions.length, pct, scaled, passed, domainStats, qResults };
+  showResults(results);
+}
+
+// ===================================================================
+// RESULTS
+// ===================================================================
+function showResults(r) {
+  document.getElementById('exam-ui').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+
+  const badge = document.getElementById('result-badge');
+  badge.className = 'result-pass-badge ' + (r.passed ? 'badge-pass' : 'badge-fail');
+  badge.innerHTML = r.passed ? '✓ PASSED' : '✗ NOT PASSED';
+
+  const pctEl = document.getElementById('result-pct');
+  pctEl.className = 'result-pct ' + (r.passed ? 'pct-pass' : 'pct-fail');
+  pctEl.textContent = r.pct + '%';
+
+  document.getElementById('result-scaled').innerHTML =
+    `Scaled Score: <span>${r.scaled} / 1000</span> &nbsp;&middot;&nbsp; Pass: ${EXAM.passScaled}`;
+  document.getElementById('result-correct').innerHTML =
+    `<strong>${r.correct}</strong> of <strong>${r.total}</strong> questions correct`;
+
+  const rowsHtml = DOMAIN_ORDER.map(d => {
+    const s = r.domainStats[d] || { correct: 0, total: 0 };
+    const dp = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    let cls = 'dr-bad';
+    if (dp >= 72) cls = 'dr-good'; else if (dp >= 50) cls = 'dr-mid';
+    return `
+      <div class="domain-row-r">
+        <div class="dr-name">${DOMAIN_SHORT[d]}: ${d}</div>
+        <div class="dr-score">${s.correct}/${s.total}</div>
+        <div class="dr-pct ${cls}">${dp}%</div>
+      </div>`;
+  }).join('');
+  document.getElementById('domain-breakdown-rows').innerHTML = rowsHtml;
+  window.scrollTo(0, 0);
+}
+
+// ===================================================================
+// REVIEW MODE
+// ===================================================================
+function showReview() {
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('review-screen').style.display = 'block';
+
+  const html = questions.map((q, idx) => {
+    const userAns = (results.qResults[idx] && results.qResults[idx].userAns) || [];
+    const isCorrect = results.qResults[idx].isCorrect;
+
+    const optsHtml = q.options.map(opt => {
+      const isCorrectOpt = q.correct.includes(opt.id);
+      const isUserOpt    = userAns.includes(opt.id);
+      let cls = 'no-select';
+      let icon = '';
+      if (isCorrectOpt) { cls += ' correct-ans'; icon = '✓'; }
+      else if (isUserOpt) { cls += ' wrong-ans'; icon = '✗'; }
+      return `
+        <li class="option-item ${cls}">
+          <span class="opt-letter">${opt.id.toUpperCase()}</span>
+          <span class="opt-label">${escapeHtml(opt.text)}</span>
+          ${icon ? `<span class="opt-icon">${icon}</span>` : ''}
+        </li>`;
+    }).join('');
+
+    const userTxt = userAns.length
+      ? userAns.map(a => a.toUpperCase()).sort().join(', ')
+      : '— (unanswered)';
+    const correctTxt = q.correct.map(a => a.toUpperCase()).sort().join(', ');
+
+    return `
+      <div class="review-q-card ${isCorrect ? 'rq-correct' : 'rq-wrong'}">
+        <div class="rq-header">
+          <span class="q-num-badge">Question ${idx + 1}</span>
+          <span class="domain-tag">${DOMAIN_SHORT[q.domain]}</span>
+          ${q.type === 'multi' ? '<span class="multi-tag">MULTI-SELECT</span>' : ''}
+          <span class="rq-result-tag ${isCorrect ? 'rq-correct-tag' : 'rq-wrong-tag'}">${isCorrect ? '✓ Correct' : '✗ Incorrect'}</span>
+        </div>
+        <div class="question-text">${escapeHtml(q.question)}</div>
+        <ul class="options-list">${optsHtml}</ul>
+        <div style="margin-top:14px;font-size:13.5px;color:var(--text-2);">
+          Your answer: <strong style="color:${isCorrect ? 'var(--correct)' : 'var(--red)'}">${userTxt}</strong>
+          &nbsp;·&nbsp; Correct answer: <strong style="color:var(--correct)">${correctTxt}</strong>
+        </div>
+        <div class="explanation-box show">
+          <div class="exp-header">EXPLANATION</div>
+          <div class="exp-text">${escapeHtml(q.explanation)}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('review-wrapper').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+function backToResults() {
+  document.getElementById('review-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// ===================================================================
+// TAB-SWITCH DETECTION
+// ===================================================================
+function handleVisibilityChange() {
+  if (!examActive || submitted) return;
+  if (document.visibilityState === 'hidden' || document.hidden) {
+    blurWarnings++;
+    const remaining = EXAM.maxBlur - blurWarnings;
+    const msg = document.getElementById('blur-count-msg');
+    if (remaining > 0) {
+      msg.textContent = `Warning ${blurWarnings} of ${EXAM.maxBlur}. ${remaining} more warning(s) and your exam will be auto-submitted.`;
+    } else {
+      msg.textContent = `Maximum warnings reached. Your exam is being submitted now.`;
+    }
+    document.getElementById('blur-overlay').classList.add('show');
+    if (blurWarnings >= EXAM.maxBlur) {
+      setTimeout(() => {
+        document.getElementById('blur-overlay').classList.remove('show');
+        autoSubmit('Too many tab switches. Exam submitted automatically.');
+      }, 2500);
+    }
+  }
+}
+function attachVisibilityListeners() {
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  window.addEventListener('blur', handleVisibilityChange);
+}
+function removeVisibilityListeners() {
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
+  window.removeEventListener('blur', handleVisibilityChange);
+}
+function returnToExam() {
+  document.getElementById('blur-overlay').classList.remove('show');
+}
+
+// ===================================================================
+// UTILITIES
+// ===================================================================
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Discourage copying / right-click during the exam
+document.addEventListener('contextmenu', e => { if (examActive) e.preventDefault(); });
+document.addEventListener('keydown', e => {
+  if (!examActive) return;
+  if (e.key === 'ArrowRight') goToNext();
+  if (e.key === 'ArrowLeft')  goToPrev();
+});
+</script>
+</body>
+</html>
